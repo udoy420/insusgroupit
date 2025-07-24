@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Insus Group IT Admin</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/admin.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-shield-alt me-2"></i>
+                Insus Group IT Admin
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="content.html">
+                            <i class="fas fa-file-alt me-1"></i>Content
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="users.html">
+                            <i class="fas fa-users me-1"></i>Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">
+                            <i class="fas fa-chart-bar me-1"></i>Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-1"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-key me-2"></i>Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid py-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="h3 mb-1">User Management</h1>
+                            <p class="text-muted">Manage system users and permissions</p>
+                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                            <i class="fas fa-user-plus me-2"></i>Add New User
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Statistics -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="h4 mb-0" id="totalUsers">24</div>
+                                    <div>Total Users</div>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-users fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="h4 mb-0" id="activeUsers">18</div>
+                                    <div>Active Users</div>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-user-check fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="h4 mb-0" id="administrators">3</div>
+                                    <div>Administrators</div>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-user-shield fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="h4 mb-0" id="pendingUsers">6</div>
+                                    <div>Pending</div>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-user-clock fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Filters -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search users..." id="userSearch">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="roleFilter">
+                        <option>All Roles</option>
+                        <option>Administrator</option>
+                        <option>Editor</option>
+                        <option>Viewer</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="statusFilter">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Pending</option>
+                    </select>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-outline-primary me-2">
+                        <i class="fas fa-filter me-1"></i>Advanced Filter
+                    </button>
+                    <button class="btn btn-outline-success">
+                        <i class="fas fa-download me-1"></i>Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">System Users</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Last Login</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar me-3">
+                                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                    <span class="text-white fw-bold">JD</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <strong>John Doe</strong><br>
+                                                <small class="text-muted">john.doe@insusgroupit.com</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-danger">Administrator</span></td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>2024-01-15 14:30</td>
+                                    <td>2023-06-15</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning me-1" title="Reset Password">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary me-1" title="Suspend">
+                                            <i class="fas fa-user-slash"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Delete" onclick="deleteUser(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar me-3">
+                                                <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                    <span class="text-white fw-bold">JS</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <strong>Jane Smith</strong><br>
+                                                <small class="text-muted">jane.smith@insusgroupit.com</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-primary">Editor</span></td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>2024-01-14 10:15</td>
+                                    <td>2023-08-20</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning me-1" title="Reset Password">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary me-1" title="Suspend">
+                                            <i class="fas fa-user-slash"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Delete" onclick="deleteUser(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar me-3">
+                                                <div class="bg-info rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                    <span class="text-white fw-bold">MB</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <strong>Mike Brown</strong><br>
+                                                <small class="text-muted">mike.brown@insusgroupit.com</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-secondary">Viewer</span></td>
+                                    <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                    <td>Never</td>
+                                    <td>2024-01-10</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning me-1" title="Reset Password">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-success me-1" title="Activate">
+                                            <i class="fas fa-user-check"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Delete" onclick="deleteUser(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar me-3">
+                                                <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                    <span class="text-white fw-bold">SD</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <strong>Sarah Davis</strong><br>
+                                                <small class="text-muted">sarah.davis@insusgroupit.com</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-danger">Administrator</span></td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>2024-01-13 16:45</td>
+                                    <td>2023-09-05</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning me-1" title="Reset Password">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary me-1" title="Suspend">
+                                            <i class="fas fa-user-slash"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Delete" onclick="deleteUser(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="User pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Add User Modal -->
+            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addUserForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userEmail" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="userEmail" placeholder="user@insusgroupit.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userRole" class="form-label">Role</label>
+                                    <select class="form-select" id="userRole" required>
+                                        <option value="">Select Role</option>
+                                        <option value="Viewer">Viewer</option>
+                                        <option value="Editor">Editor</option>
+                                        <option value="Administrator">Administrator</option>
+                                    </select>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="userPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="userPassword" placeholder="Enter password" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sendWelcomeEmail" checked>
+                                        <label class="form-check-label" for="sendWelcomeEmail">
+                                            Send welcome email to new user
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="saveUser()">Add User</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="static/js/admin.js"></script>
+    <script>
+        // User-specific functionality
+        function saveUser() {
+            const form = document.getElementById('addUserForm');
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('userEmail').value;
+            const role = document.getElementById('userRole').value;
+            const password = document.getElementById('userPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validation
+            if (!firstName.trim() || !lastName.trim() || !email.trim() || !role || !password) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+            
+            // Generate initials and random color
+            const initials = (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
+            const colors = ['primary', 'success', 'info', 'warning', 'danger'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const fullName = `${firstName} ${lastName}`;
+            const currentDate = new Date().toISOString().split('T')[0];
+            
+            // Add new row to table
+            const tbody = document.getElementById('userTableBody');
+            const newRow = document.createElement('tr');
+            
+            newRow.innerHTML = `
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="avatar me-3">
+                            <div class="bg-${randomColor} rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <span class="text-white fw-bold">${initials}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>${fullName}</strong><br>
+                            <small class="text-muted">${email}</small>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="badge bg-${role === 'Administrator' ? 'danger' : role === 'Editor' ? 'primary' : 'secondary'}">${role}</span></td>
+                <td><span class="badge bg-warning text-dark">Pending</span></td>
+                <td>Never</td>
+                <td>${currentDate}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-warning me-1" title="Reset Password">
+                        <i class="fas fa-key"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-success me-1" title="Activate">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" title="Delete" onclick="deleteUser(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            
+            tbody.insertBefore(newRow, tbody.firstChild);
+            
+            // Update statistics
+            updateUserStats();
+            
+            // Reset form and close modal
+            form.reset();
+            bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+            
+            // Show success message
+            showNotification('User added successfully!', 'success');
+        }
+        
+        function deleteUser(button) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                button.closest('tr').remove();
+                updateUserStats();
+                showNotification('User deleted successfully!', 'success');
+            }
+        }
+        
+        function updateUserStats() {
+            const rows = document.querySelectorAll('#userTableBody tr');
+            const totalUsers = rows.length;
+            const activeUsers = document.querySelectorAll('#userTableBody .badge.bg-success').length;
+            const administrators = document.querySelectorAll('#userTableBody .badge.bg-danger').length;
+            const pendingUsers = document.querySelectorAll('#userTableBody .badge.bg-warning').length;
+            
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('activeUsers').textContent = activeUsers;
+            document.getElementById('administrators').textContent = administrators;
+            document.getElementById('pendingUsers').textContent = pendingUsers;
+        }
+        
+        // Initialize search functionality
+        document.getElementById('userSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#userTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+        
+        // Initialize filter functionality
+        document.getElementById('roleFilter').addEventListener('change', function() {
+            const selectedRole = this.value;
+            const rows = document.querySelectorAll('#userTableBody tr');
+            
+            rows.forEach(row => {
+                const roleElement = row.querySelector('.badge');
+                const roleText = roleElement ? roleElement.textContent : '';
+                
+                if (selectedRole === 'All Roles' || roleText === selectedRole) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+        
+        document.getElementById('statusFilter').addEventListener('change', function() {
+            const selectedStatus = this.value;
+            const rows = document.querySelectorAll('#userTableBody tr');
+            
+            rows.forEach(row => {
+                const statusElements = row.querySelectorAll('.badge');
+                const statusElement = statusElements[1]; // Second badge is status
+                const statusText = statusElement ? statusElement.textContent : '';
+                
+                if (selectedStatus === 'All Status' || statusText === selectedStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

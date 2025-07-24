@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Insus Group IT Admin</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/admin.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-shield-alt me-2"></i>
+                Insus Group IT Admin
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="content.html">
+                            <i class="fas fa-file-alt me-1"></i>Content
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="users.html">
+                            <i class="fas fa-users me-1"></i>Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">
+                            <i class="fas fa-chart-bar me-1"></i>Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="settings.html">
+                            <i class="fas fa-cog me-1"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-key me-2"></i>Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid py-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h1 class="h3 mb-1">System Settings</h1>
+                    <p class="text-muted">Configure website and system preferences</p>
+                </div>
+            </div>
+
+            <!-- Settings Navigation Tabs -->
+            <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">
+                        <i class="fas fa-cog me-2"></i>General
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="website-tab" data-bs-toggle="tab" data-bs-target="#website" type="button" role="tab">
+                        <i class="fas fa-globe me-2"></i>Website
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">
+                        <i class="fas fa-shield-alt me-2"></i>Security
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button" role="tab">
+                        <i class="fas fa-envelope me-2"></i>Email
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="backup-tab" data-bs-toggle="tab" data-bs-target="#backup" type="button" role="tab">
+                        <i class="fas fa-database me-2"></i>Backup
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Settings Content -->
+            <div class="tab-content" id="settingsTabContent">
+                <!-- General Settings -->
+                <div class="tab-pane fade show active" id="general" role="tabpanel">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">General Settings</h6>
+                        </div>
+                        <div class="card-body">
+                            <form id="generalForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="siteName" class="form-label">Site Name</label>
+                                        <input type="text" class="form-control" id="siteName" value="Insus Group IT">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="adminEmail" class="form-label">Admin Email</label>
+                                        <input type="email" class="form-control" id="adminEmail" value="admin@insusgroupit.com">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="siteDescription" class="form-label">Site Description</label>
+                                    <textarea class="form-control" id="siteDescription" rows="3">Professional IT solutions and services for businesses worldwide.</textarea>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="timezone" class="form-label">Timezone</label>
+                                        <select class="form-select" id="timezone">
+                                            <option>UTC</option>
+                                            <option selected>America/New_York</option>
+                                            <option>Europe/London</option>
+                                            <option>Asia/Tokyo</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="language" class="form-label">Default Language</label>
+                                        <select class="form-select" id="language">
+                                            <option selected>English</option>
+                                            <option>Spanish</option>
+                                            <option>French</option>
+                                            <option>German</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="maintenanceMode">
+                                        <label class="form-check-label" for="maintenanceMode">
+                                            Enable Maintenance Mode
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save General Settings</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Settings -->
+                <div class="tab-pane fade" id="website" role="tabpanel">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Website Settings</h6>
+                        </div>
+                        <div class="card-body">
+                            <form id="websiteForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="homePageTitle" class="form-label">Home Page Title</label>
+                                        <input type="text" class="form-control" id="homePageTitle" value="Professional IT Solutions - Insus Group IT">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="metaKeywords" class="form-label">Meta Keywords</label>
+                                        <input type="text" class="form-control" id="metaKeywords" value="IT services, software development, consulting">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="metaDescription" class="form-label">Meta Description</label>
+                                    <textarea class="form-control" id="metaDescription" rows="2">Leading provider of comprehensive IT solutions including software development, system integration, and technical consulting services.</textarea>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="contactPhone" class="form-label">Contact Phone</label>
+                                        <input type="tel" class="form-control" id="contactPhone" value="+1 (555) 123-4567">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contactEmail" class="form-label">Contact Email</label>
+                                        <input type="email" class="form-control" id="contactEmail" value="info@insusgroupit.com">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="companyAddress" class="form-label">Company Address</label>
+                                    <textarea class="form-control" id="companyAddress" rows="2">123 Technology Drive, Suite 100
+Innovation City, IC 12345</textarea>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="facebookUrl" class="form-label">Facebook URL</label>
+                                        <input type="url" class="form-control" id="facebookUrl" placeholder="https://facebook.com/...">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="linkedinUrl" class="form-label">LinkedIn URL</label>
+                                        <input type="url" class="form-control" id="linkedinUrl" placeholder="https://linkedin.com/company/...">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="twitterUrl" class="form-label">Twitter URL</label>
+                                        <input type="url" class="form-control" id="twitterUrl" placeholder="https://twitter.com/...">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Website Settings</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="tab-pane fade" id="security" role="tabpanel">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Security Settings</h6>
+                        </div>
+                        <div class="card-body">
+                            <form id="securityForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="sessionTimeout" class="form-label">Session Timeout (minutes)</label>
+                                        <input type="number" class="form-control" id="sessionTimeout" value="30">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="maxLoginAttempts" class="form-label">Max Login Attempts</label>
+                                        <input type="number" class="form-control" id="maxLoginAttempts" value="5">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password Policy</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="requireUppercase" checked>
+                                        <label class="form-check-label" for="requireUppercase">
+                                            Require uppercase letters
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="requireNumbers" checked>
+                                        <label class="form-check-label" for="requireNumbers">
+                                            Require numbers
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="requireSpecialChars" checked>
+                                        <label class="form-check-label" for="requireSpecialChars">
+                                            Require special characters
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="minPasswordLength" class="form-label">Minimum Password Length</label>
+                                        <input type="number" class="form-control" id="minPasswordLength" value="8">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="passwordExpiry" class="form-label">Password Expiry (days)</label>
+                                        <input type="number" class="form-control" id="passwordExpiry" value="90">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="enableTwoFactor">
+                                        <label class="form-check-label" for="enableTwoFactor">
+                                            Enable Two-Factor Authentication
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Security Settings</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Settings -->
+                <div class="tab-pane fade" id="email" role="tabpanel">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Email Settings</h6>
+                        </div>
+                        <div class="card-body">
+                            <form id="emailForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="smtpHost" class="form-label">SMTP Host</label>
+                                        <input type="text" class="form-control" id="smtpHost" placeholder="smtp.gmail.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="smtpPort" class="form-label">SMTP Port</label>
+                                        <input type="number" class="form-control" id="smtpPort" value="587">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="smtpUsername" class="form-label">SMTP Username</label>
+                                        <input type="text" class="form-control" id="smtpUsername" placeholder="your-email@gmail.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="smtpPassword" class="form-label">SMTP Password</label>
+                                        <input type="password" class="form-control" id="smtpPassword" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="fromEmail" class="form-label">From Email</label>
+                                        <input type="email" class="form-control" id="fromEmail" value="noreply@insusgroupit.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fromName" class="form-label">From Name</label>
+                                        <input type="text" class="form-control" id="fromName" value="Insus Group IT">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="enableSSL" checked>
+                                        <label class="form-check-label" for="enableSSL">
+                                            Enable SSL/TLS
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary">Save Email Settings</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="testEmailConnection()">Test Connection</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backup Settings -->
+                <div class="tab-pane fade" id="backup" role="tabpanel">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Backup & Maintenance</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Automated Backups</h6>
+                                    <form id="backupForm">
+                                        <div class="mb-3">
+                                            <label for="backupFrequency" class="form-label">Backup Frequency</label>
+                                            <select class="form-select" id="backupFrequency">
+                                                <option>Disabled</option>
+                                                <option selected>Daily</option>
+                                                <option>Weekly</option>
+                                                <option>Monthly</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="backupTime" class="form-label">Backup Time</label>
+                                            <input type="time" class="form-control" id="backupTime" value="02:00">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="retentionDays" class="form-label">Retention Period (days)</label>
+                                            <input type="number" class="form-control" id="retentionDays" value="30">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save Backup Settings</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Manual Backup</h6>
+                                    <p class="text-muted">Create an immediate backup of your system.</p>
+                                    <button class="btn btn-success mb-3" onclick="createBackup()">
+                                        <i class="fas fa-database me-2"></i>Create Backup Now
+                                    </button>
+                                    
+                                    <h6>Recent Backups</h6>
+                                    <div class="list-group">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>backup_2024-01-15.zip</strong><br>
+                                                <small class="text-muted">Size: 45.2 MB</small>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>backup_2024-01-14.zip</strong><br>
+                                                <small class="text-muted">Size: 44.8 MB</small>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>backup_2024-01-13.zip</strong><br>
+                                                <small class="text-muted">Size: 43.9 MB</small>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-sm btn-outline-primary me-1" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="static/js/admin.js"></script>
+    <script>
+        // Settings-specific functionality
+        function testEmailConnection() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Testing...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                showNotification('Email connection test successful!', 'success');
+            }, 2000);
+        }
+        
+        function createBackup() {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating Backup...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                
+                // Add new backup to the list
+                const backupList = document.querySelector('.list-group');
+                const date = new Date().toISOString().split('T')[0];
+                const size = (Math.random() * 10 + 40).toFixed(1);
+                
+                const newBackup = document.createElement('div');
+                newBackup.className = 'list-group-item d-flex justify-content-between align-items-center';
+                newBackup.innerHTML = `
+                    <div>
+                        <strong>backup_${date}.zip</strong><br>
+                        <small class="text-muted">Size: ${size} MB</small>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-1" title="Download">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                backupList.insertBefore(newBackup, backupList.firstChild);
+                showNotification('Backup created successfully!', 'success');
+            }, 3000);
+        }
+        
+        // Form submission handlers
+        document.getElementById('generalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('General settings saved successfully!', 'success');
+        });
+        
+        document.getElementById('websiteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Website settings saved successfully!', 'success');
+        });
+        
+        document.getElementById('securityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Security settings saved successfully!', 'success');
+        });
+        
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Email settings saved successfully!', 'success');
+        });
+        
+        document.getElementById('backupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Backup settings saved successfully!', 'success');
+        });
+        
+        // Auto-save functionality
+        document.querySelectorAll('#settingsTabContent input, #settingsTabContent select, #settingsTabContent textarea').forEach(input => {
+            input.addEventListener('change', function() {
+                // Save to localStorage for persistence
+                const key = `admin_setting_${this.id}`;
+                const value = this.type === 'checkbox' ? this.checked : this.value;
+                localStorage.setItem(key, JSON.stringify(value));
+                
+                // Show auto-save indicator
+                if (!document.getElementById('autoSaveIndicator')) {
+                    const indicator = document.createElement('div');
+                    indicator.id = 'autoSaveIndicator';
+                    indicator.className = 'position-fixed bottom-0 end-0 m-3 alert alert-info fade show';
+                    indicator.innerHTML = '<i class="fas fa-save me-2"></i>Auto-saved';
+                    document.body.appendChild(indicator);
+                    
+                    setTimeout(() => {
+                        indicator.remove();
+                    }, 2000);
+                }
+            });
+        });
+        
+        // Load saved settings from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('#settingsTabContent input, #settingsTabContent select, #settingsTabContent textarea').forEach(input => {
+                const key = `admin_setting_${input.id}`;
+                const saved = localStorage.getItem(key);
+                
+                if (saved !== null) {
+                    const value = JSON.parse(saved);
+                    if (input.type === 'checkbox') {
+                        input.checked = value;
+                    } else {
+                        input.value = value;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
